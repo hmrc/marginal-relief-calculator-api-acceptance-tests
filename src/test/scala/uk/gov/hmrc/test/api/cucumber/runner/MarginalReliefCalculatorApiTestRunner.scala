@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 HM Revenue & Customs
+ * Copyright 2020 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package uk.gov.hmrc.test.api.cucumber.runner
+import io.cucumber.junit.{Cucumber, CucumberOptions}
+import org.junit.runner.RunWith
 
-package uk.gov.hmrc.test.api.models
-
-import play.api.libs.json.{Json, OFormat}
-
-case class IndividualsLinks(name: String, href: String, title: String)
-
-object IndividualsLinks {
-  implicit val userJsonFormat: OFormat[IndividualsLinks] = Json.format[IndividualsLinks]
-}
+@RunWith(classOf[Cucumber])
+@CucumberOptions(
+  features = Array("src/test/resources/features"),
+  glue = Array("uk.gov.hmrc.test.api.cucumber.stepdefs", "uk.gov.hmrc.test.api.cucumber.hooks"),
+  plugin = Array("pretty", "html:target/cucumber", "json:target/cucumber.json"),
+  tags = Array("")
+)
+class MarginalReliefCalculatorApiTestRunner {}

@@ -14,13 +14,23 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.models
+package uk.gov.hmrc.test.api.utils
 
-import play.api.libs.json.{Json, OFormat}
+object ScenarioContext {
+  private var scenarioValues = Map.empty[String, Any]
 
-case class User(firstName: String, lastName: String, nino: String, dateOfBirth: String)
+  def set(key: String, value: Any) {
+    scenarioValues = scenarioValues + (key -> value)
+  }
 
-object User {
-  implicit val userJsonFormat: OFormat[User] = Json.format[User]
-  val ninoUser: User                         = User("Luke", "Wood", "EG724113D", "1960-04-06")
+  def get[T: Manifest](key: String): T =
+    scenarioValues
+      .get(key)
+      .fold(throw new Exception(s"Key $key not found in scenario context"))(_.asInstanceOf[T])
+
+  def remove(key: String): Unit = scenarioValues = scenarioValues - key
+
+  def reset() {
+    scenarioValues = Map.empty[String, Any]
+  }
 }

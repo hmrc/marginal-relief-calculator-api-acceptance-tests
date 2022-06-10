@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.models
+package uk.gov.hmrc.test.api.cucumber.runner
+import io.cucumber.junit.{Cucumber, CucumberOptions}
+import org.junit.runner.RunWith
 
-import play.api.libs.json.{Json, OFormat}
-
-case class IndividualsLinks(name: String, href: String, title: String)
-
-object IndividualsLinks {
-  implicit val userJsonFormat: OFormat[IndividualsLinks] = Json.format[IndividualsLinks]
-}
+@RunWith(classOf[Cucumber])
+@CucumberOptions(
+  features = Array("src/test/resources/features"),
+  glue = Array("uk.gov.hmrc.test.api.cucumber.stepdefs", "uk.gov.hmrc.test.api.cucumber.hooks"),
+  plugin = Array("pretty", "html:target/cucumber", "json:target/cucumber.json"),
+  tags = Array("")
+)
+class MarginalReliefCalculatorApiTestRunner {}

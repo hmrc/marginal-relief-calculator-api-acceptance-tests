@@ -1,7 +1,7 @@
 name := "marginal-relief-calculator-api-acceptance-tests"
 version := "0.1.0"
 scalaVersion := "2.12.12"
-scalacOptions ++= Seq("-feature")
+
 val CucumberVersion = "4.7.1"
 
 resolvers += "hmrc-releases" at "https://artefacts.tax.service.gov.uk/artifactory/hmrc-releases/"
@@ -27,7 +27,7 @@ libraryDependencies ++= Seq(
     "org.julienrf"               %% "play-json-derived-codecs" % "7.0.0",
     "com.beachape"               %% "enumeratum-play-json"     % "1.6.1"
 )
-
+addCommandAlias("fmt", "scalafmt;scalafmtSbt;test:scalafmt;it:scalafmt")
 addCompilerPlugin(
     ("org.scalamacros" %% "paradise" % "2.1.1").cross(CrossVersion.full)
 )

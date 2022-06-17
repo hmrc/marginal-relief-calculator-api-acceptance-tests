@@ -21,10 +21,14 @@ import uk.gov.hmrc.test.api.utils.BaseUris
 
 object MarginalReliefCalculatorRequests extends BaseUris {
 
-  //Used by hello world only
-  def getMarginalReliefCalculatorRequests(endpoint: String): StandaloneWSResponse = {
+  def getMarginalReliefCalculatorRequests(endpoint: String,accountingPeriodStart: String,accountingPeriodEnd: String, profit: String ): StandaloneWSResponse = {
 
-    val baseUri = s"$marginalreliefCalculatorApiUrl/marginal-relief-calculator$endpoint"
+    val baseUri = s"$marginalreliefCalculatorApiUrl/marginal-relief-calculator-backend$endpoint"
+    val queryParameters = Map(
+      "accountingPeriodStart" -> accountingPeriodStart,
+      "accountingPeriodEnd"   -> accountingPeriodEnd,
+      "profit" -> profit
+    )
     val headers = Map(
       "Content-Type" -> "application/json",
       "Accept"       -> "application/vnd.hmrc.1.0+json"
@@ -32,7 +36,7 @@ object MarginalReliefCalculatorRequests extends BaseUris {
 
     print("Marginal Relief Calculator baseUri ************************" + baseUri)
 
-    WsClient.get(baseUri, headers = headers)
+    WsClient.get(baseUri,queryParameters = queryParameters, headers = headers)
   }
 
 }

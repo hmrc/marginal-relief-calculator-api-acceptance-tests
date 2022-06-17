@@ -17,7 +17,7 @@ package uk.gov.hmrc.test.api.models
 
 import play.api.libs.json.{Json, OFormat}
 
-case class MRCCaluationSummary(
+case class FY1MRCCalculationSummary(
                                 effectiveTaxRateBeforeMR: Double,
                                 corporationTaxBeforeMR: Double,
                                 effectiveTaxRate: Double,
@@ -25,6 +25,6 @@ case class MRCCaluationSummary(
                                 corporationTax: Double
                               )
 
-object MRCCaluationSummary {
-  implicit val formatMRCCalculation: OFormat[MRCCaluationSummary] = Json.format[MRCCaluationSummary]
+object FY1MRCCalculationSummary {
+  implicit val formatMRCCalculation: OFormat[FY1MRCCalculationSummary] = Json.format[FY1MRCCalculationSummary]
 }

@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package uk.gov.hmrc.test.api.requests
 
 import play.api.libs.ws.StandaloneWSResponse
@@ -21,22 +22,27 @@ import uk.gov.hmrc.test.api.utils.BaseUris
 
 object MarginalReliefCalculatorRequests extends BaseUris {
 
-  def getMarginalReliefCalculatorRequests(endpoint: String,accountingPeriodStart: String,accountingPeriodEnd: String, profit: String ): StandaloneWSResponse = {
+  def  getMarginalReliefCalculatorRequests(
+    endpoint: String,
+    accountingPeriodStart: String,
+    accountingPeriodEnd: String,
+    profit: String
+  ): StandaloneWSResponse = {
 
-    val baseUri = s"$marginalreliefCalculatorApiUrl/marginal-relief-calculator-backend$endpoint"
+    val baseUri         = s"$marginalreliefCalculatorApiUrl/marginal-relief-calculator-backend$endpoint"
     val queryParameters = Map(
       "accountingPeriodStart" -> accountingPeriodStart,
       "accountingPeriodEnd"   -> accountingPeriodEnd,
-      "profit" -> profit
+      "profit"                -> profit
     )
-    val headers = Map(
+    val headers         = Map(
       "Content-Type" -> "application/json",
       "Accept"       -> "application/vnd.hmrc.1.0+json"
     )
 
     print("Marginal Relief Calculator baseUri ************************" + baseUri)
 
-    WsClient.get(baseUri,queryParameters = queryParameters, headers = headers)
+    WsClient.get(baseUri, queryParameters = queryParameters, headers = headers)
   }
 
 }

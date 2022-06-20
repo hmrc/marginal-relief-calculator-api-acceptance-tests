@@ -13,18 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package uk.gov.hmrc.test.api.models
 
 import play.api.libs.json.{Json, OFormat}
 
-case class FY1MRCCalculationSummary(
-                                effectiveTaxRateBeforeMR: Double,
-                                corporationTaxBeforeMR: Double,
-                                effectiveTaxRate: Double,
-                                marginalRelief: Double,
-                                corporationTax: Double
-                              )
+case class FY1CalculationSummary(
+                                  effectiveTaxRateBeforeMR: Double,
+  corporationTaxBeforeMR: Double,
+  effectiveTaxRate: Double,
+  marginalRelief: Double,
+  corporationTax: Double
+)
 
-object FY1MRCCalculationSummary {
-  implicit val formatMRCCalculation: OFormat[FY1MRCCalculationSummary] = Json.format[FY1MRCCalculationSummary]
+object FY1CalculationSummary {
+  implicit val formatFY1Calculation: OFormat[FY1CalculationSummary] = Json.format[FY1CalculationSummary]
 }

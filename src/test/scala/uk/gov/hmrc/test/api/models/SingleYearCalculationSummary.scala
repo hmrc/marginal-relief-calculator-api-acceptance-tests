@@ -14,15 +14,18 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.utils
+package uk.gov.hmrc.test.api.models
 
-import scala.util.Random
+import play.api.libs.json.{Json, OFormat}
 
-trait RandomValues {
-  def getRandomAffinityGroup: String = {
-    val possibleAffinityGroups = Seq("Individual", "Organisation")
-    val random                 = new Random
-    val randomIndex            = random.nextInt(possibleAffinityGroups.length)
-    possibleAffinityGroups(randomIndex)
-  }
+case class SingleYearCalculationSummary(
+  effectiveTaxRateBeforeMR: Double,
+  corporationTaxBeforeMR: Double,
+  effectiveTaxRate: Double,
+  marginalRelief: Double,
+  corporationTax: Double
+)
+
+object SingleYearCalculationSummary {
+  implicit val formatSingleYear: OFormat[SingleYearCalculationSummary] = Json.format[SingleYearCalculationSummary]
 }

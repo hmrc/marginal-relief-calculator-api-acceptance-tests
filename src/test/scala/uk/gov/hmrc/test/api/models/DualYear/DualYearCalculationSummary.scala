@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.utils
+package uk.gov.hmrc.test.api.models.DualYear
 
-import scala.util.Random
+import play.api.libs.json.{Json, OFormat}
 
-trait RandomValues {
-  def getRandomAffinityGroup: String = {
-    val possibleAffinityGroups = Seq("Individual", "Organisation")
-    val random                 = new Random
-    val randomIndex            = random.nextInt(possibleAffinityGroups.length)
-    possibleAffinityGroups(randomIndex)
-  }
+final case class DualYearCalculationSummary(years: List[FYSummary])
+
+object DualYearCalculationSummary {
+  implicit val formatDualYear: OFormat[DualYearCalculationSummary] = Json.format[DualYearCalculationSummary]
 }

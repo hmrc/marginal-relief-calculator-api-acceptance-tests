@@ -28,7 +28,7 @@ import uk.gov.hmrc.test.api.requests.MarginalReliefCalculatorRequests.getMargina
 import uk.gov.hmrc.test.api.utils.ScenarioContext
 
 class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually with Matchers {
-  When("a request is made to GET response from MRC service for (.*) with query params (.*), (.*), (.*)") {
+  When("a request is made to GET response from MRC service for (.*) with query params accountingPeriodStart as (.*),accountingPeriodEnd as (.*), profit as (.*)"){
     (endPoint: String, accountingPeriodStart: String, accountingPeriodEnd: String, profit: String) =>
       val response = getMarginalReliefCalculatorRequests(endPoint, accountingPeriodStart, accountingPeriodEnd, profit)
       ScenarioContext.set("response", response)
@@ -40,10 +40,6 @@ class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually wit
     response.body.contains(expectedCode)
   }
 
-  And("the MRC hello world response body should be (.*)") { message: String =>
-    val response: StandaloneWSResponse = ScenarioContext.get("response")
-    response.status should be(message)
-  }
   And("MRC response contains") { (dataTable: DataTable) =>
     val asMapTransposed                = dataTable.transpose().asMap(classOf[String], classOf[String])
     val response: StandaloneWSResponse = ScenarioContext.get("response")
@@ -85,7 +81,7 @@ class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually wit
       responseBody.corporationTax.toString shouldBe asMapTransposed.get("corporationTax").toString
     }
   }
-  And("for the FY2 the MRC service wilL return") { (dataTable: DataTable) =>
+  And("for the FY2 the MRC service will return") { (dataTable: DataTable) =>
     val asMapTransposed                = dataTable.transpose().asMap(classOf[String], classOf[String])
     val response: StandaloneWSResponse = ScenarioContext.get("response")
     val responseBody                   = Json.parse(response.body).as[FYSummary]

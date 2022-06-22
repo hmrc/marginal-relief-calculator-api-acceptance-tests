@@ -26,7 +26,8 @@ object MarginalReliefCalculatorRequests extends BaseUris {
     endpoint: String,
     accountingPeriodStart: String,
     accountingPeriodEnd: String,
-    profit: String
+    profit: String,
+    exemptDistributions: String
   ): StandaloneWSResponse = {
 
     val baseUri         = s"$marginalreliefCalculatorApiUrl/marginal-relief-calculator-backend$endpoint"

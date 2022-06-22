@@ -21,20 +21,19 @@ import org.scalatest.Matchers
 import org.scalatest.concurrent.Eventually
 import play.api.libs.json.Json
 import play.api.libs.ws.StandaloneWSResponse
+import uk.gov.hmrc.test.api.models.DualYear.DualYearCalculationSummary
 import uk.gov.hmrc.test.api.models.DualYear.FYSummary
-//import uk.gov.hmrc.test.api.models.DualYear{DualYearCalculationsummary, FYSummary}
 import uk.gov.hmrc.test.api.models.SingleYearCalculationSummary
 import uk.gov.hmrc.test.api.requests.MarginalReliefCalculatorRequests.getMarginalReliefCalculatorRequests
 import uk.gov.hmrc.test.api.utils.ScenarioContext
 
 class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually with Matchers {
-  When("a request is made to GET response from MRC service for (.*) with query params accountingPeriodStart as (.*),accountingPeriodEnd as (.*), profit as (.*)"){
-    (endPoint: String, accountingPeriodStart: String, accountingPeriodEnd: String, profit: String) =>
-      val response = getMarginalReliefCalculatorRequests(endPoint, accountingPeriodStart, accountingPeriodEnd, profit)
+  When("a request is made to GET response from MRC service for (.*) with query params accountingPeriodStart as (.*),accountingPeriodEnd as (.*), profit as (.*),exemptDistributions as (.*)"){
+    (endPoint: String, accountingPeriodStart: String, accountingPeriodEnd: String, profit: String,exemptDistributions : String) =>
+      val response = getMarginalReliefCalculatorRequests(endPoint, accountingPeriodStart, accountingPeriodEnd, profit,exemptDistributions)
       ScenarioContext.set("response", response)
       println(s"RESPONSE --> ${response.body}")
   }
-
   Then("the MRC response code should be (.*)") { expectedCode: String =>
     val response: StandaloneWSResponse = ScenarioContext.get("response")
     response.body.contains(expectedCode)
@@ -64,7 +63,7 @@ class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually wit
   And("for the FY1 the MRC service wilL return") { (dataTable: DataTable) =>
     val asMapTransposed                = dataTable.transpose().asMap(classOf[String], classOf[String])
     val response: StandaloneWSResponse = ScenarioContext.get("response")
-    val responseBody                   = Json.parse(response.body).as[FYSummary]
+    val responseBody                   = Json.parse(response.body).as[DualYearCalculationSummary]
     if (asMapTransposed.containsKey("effectiveTaxRateBeforeMR")) {
       responseBody.effectiveTaxRateBeforeMR.toString shouldBe asMapTransposed.get("effectiveTaxRateBeforeMR").toString
     }

@@ -19,6 +19,7 @@ package uk.gov.hmrc.test.api.models.DualYear
 import play.api.libs.json.{Json, OFormat}
 
 case class FYSummary(
+  year: Int,
   effectiveTaxRateBeforeMR: Double,
   corporationTaxBeforeMR: Double,
   effectiveTaxRate: Double,

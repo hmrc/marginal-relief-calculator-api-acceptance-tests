@@ -58,7 +58,7 @@ class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually wit
       responseBody.corporationTax.toString shouldBe asMapTransposed.get("corporationTax").toString
     }
   }
-  And("for the FY1 the MRC service wilL return") { (dataTable: DataTable) =>
+  And("for the FY1 the MRC service will return") { (dataTable: DataTable) =>
     val asMapTransposed = dataTable.transpose().asMap(classOf[String], classOf[String])
     val response: StandaloneWSResponse = ScenarioContext.get("response")
     val responseBody = Json.parse(response.body).as[DualYearCalculationSummary].year1

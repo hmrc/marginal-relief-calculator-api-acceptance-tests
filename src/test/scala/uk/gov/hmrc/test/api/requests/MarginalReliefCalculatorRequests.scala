@@ -34,7 +34,8 @@ object MarginalReliefCalculatorRequests extends BaseUris {
     val queryParameters = Map(
       "accountingPeriodStart" -> accountingPeriodStart,
       "accountingPeriodEnd"   -> accountingPeriodEnd,
-      "profit"                -> profit
+      "profit"                -> profit,
+      "exemptDistributions"   -> exemptDistributions
     )
     val headers         = Map(
       "Content-Type" -> "application/json",

@@ -22,7 +22,7 @@ import uk.gov.hmrc.test.api.utils.BaseUris
 
 object MarginalReliefCalculatorRequests extends BaseUris {
 
-  def  getMarginalReliefCalculatorRequests(
+  def getMarginalReliefCalculatorRequests(
     endpoint: String,
     accountingPeriodStart: String,
     accountingPeriodEnd: String,

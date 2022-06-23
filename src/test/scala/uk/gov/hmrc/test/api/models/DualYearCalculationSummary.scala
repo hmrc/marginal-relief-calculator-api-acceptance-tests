@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.models.DualYear
+package uk.gov.hmrc.test.api.models
 
-import play.api.libs.json.{Json, OFormat}
+import play.api.libs.json.Json
 
-final case class DualYearCalculationSummary(years: List[FYSummary])
+final case class DualYearCalculationSummary(
+  year1: YearSummary,
+  year2: YearSummary,
+  effectiveTaxRateBeforeMR: Double,
+  effectiveTaxRate: Double
+)
 
 object DualYearCalculationSummary {
-  implicit val formatDualYear: OFormat[DualYearCalculationSummary] = Json.format[DualYearCalculationSummary]
+  implicit val formatDualYear = Json.format[DualYearCalculationSummary]
 }

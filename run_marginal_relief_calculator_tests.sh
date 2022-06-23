@@ -20,5 +20,5 @@ if [[ "$status_code" -ne 200 ]] ; then
   exit 1
 fi
 sleep 2
-
+sbt scalafmtCheckAll scalafmtSbtCheck
 sbt -Denvironment="$environment" -Dcucumber.options="--tags '$tags'" clean 'testOnly uk.gov.hmrc.test.api.cucumber.runner.MarginalReliefCalculatorApiTestRunner'

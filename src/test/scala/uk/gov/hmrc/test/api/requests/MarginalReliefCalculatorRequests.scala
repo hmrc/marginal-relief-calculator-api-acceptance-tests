@@ -22,11 +22,12 @@ import uk.gov.hmrc.test.api.utils.BaseUris
 
 object MarginalReliefCalculatorRequests extends BaseUris {
 
-  def  getMarginalReliefCalculatorRequests(
+  def getMarginalReliefCalculatorRequests(
     endpoint: String,
     accountingPeriodStart: String,
     accountingPeriodEnd: String,
-    profit: String
+    profit: String,
+    exemptDistributions: String
   ): StandaloneWSResponse = {
 
     val baseUri         = s"$marginalreliefCalculatorApiUrl/marginal-relief-calculator-backend$endpoint"

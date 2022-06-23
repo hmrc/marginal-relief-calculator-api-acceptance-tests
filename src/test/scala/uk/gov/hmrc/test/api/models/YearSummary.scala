@@ -18,7 +18,7 @@ package uk.gov.hmrc.test.api.models
 
 import play.api.libs.json.Json
 
-final case class FY1Summary(
+final case class YearSummary(
   year: Int,
   effectiveTaxRateBeforeMR: Double,
   corporationTaxBeforeMR: Double,
@@ -26,7 +26,6 @@ final case class FY1Summary(
   marginalRelief: Double,
   corporationTax: Double
 )
-object FY1Summary {
-  implicit val formatYear1 = Json.format[FY1Summary]
+object YearSummary {
+  implicit val formatYear1 = Json.format[YearSummary]
 }
-

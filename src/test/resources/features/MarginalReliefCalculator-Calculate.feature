@@ -76,7 +76,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
     And the TOTAL will be
       | effectiveTaxRateBeforeMR | effectiveTaxRate |
       | 23.52                    | 23.52            |
-
+@runME
   Scenario:MR-49_AC4-ED - YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS / ED'S AND AUGMENTED FIGURES ARE EQUAL TO THE LOWER 2023 THRESHOLDS
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 44000,exemptDistributions as 6000
     Then the MRC response code should be 200
@@ -158,6 +158,6 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 25.0                     | 37500.0                | 24.42            | 875.0          | 36625.0        |
 
   Scenario: Unable to retrieve MRC Service
-    When a request is made to GET response from MRC service for /calculatee with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-01, profit as 400000,,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculatee with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-01, profit as 400000,exemptDistributions as 0
     Then the MRC response code should be 404
 

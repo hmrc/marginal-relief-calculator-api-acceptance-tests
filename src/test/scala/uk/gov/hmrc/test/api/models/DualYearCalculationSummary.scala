@@ -19,10 +19,10 @@ package uk.gov.hmrc.test.api.models
 import play.api.libs.json.Json
 
 final case class DualYearCalculationSummary(
-  year1: FY1Summary,
-  year2: FY2Summary,
+  year1: YearSummary,
+  year2: YearSummary,
   effectiveTaxRateBeforeMR: Double,
-  effectiveTaxRate : Double
+  effectiveTaxRate: Double
 )
 
 object DualYearCalculationSummary {

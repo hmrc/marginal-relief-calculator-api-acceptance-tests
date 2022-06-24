@@ -1,35 +1,35 @@
 Feature:  Basic MR calculation for single financial year with MR rate
 
   Scenario:MR-68_AC1 _1 COMPLETE YEAR + PROFITS LIES WITHIN MR THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 100000,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 100000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
     And  MRC response contains
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 25000.0                | 22.75            | 2250.0         | 22750.0        |
 
   Scenario:MR-68_AC2_FALLS WITHIN 1 MR YEAR + PROFITS WITH WITHIN MR THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-02-01, profit as 100000,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-02-01, profit as 100000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
     And MRC response contains
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 25000.0                | 23.35            | 1654.11        | 23345.89       |
 
   Scenario:MR-68_AC3-FALLS WITHIN 1 ** MR YEAR INCLUDES 29/02/2024 (Leap Year) for Yr 23 + PROFITS WITH WITHIN MR THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-01, profit as 100000,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-01, profit as 100000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
     And MRC response contains
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 25000.0                | 23.05            | 1952.05        | 23047.95       |
 
   Scenario:MR-68_AC4_FALLS WITHIN 1 ** MR YEAR INCLUDES 29/02/2024 (Leap Year) for Yr 23 + PROFITS LESS THAN MR THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-01, profit as 40000,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-01, profit as 40000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
     And MRC response contains
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 19.0                     | 7600.0                 | 19.0             | 0.0            | 7600.0         |
 
   Scenario:  MR-70 AC1 - SPANS FLAT AND MR RATES +  PROFITS WITH WITHIN MR THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 60000,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 60000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -42,7 +42,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 20.0                     | 19.21            |
 
   Scenario:  MR-70 AC2 - SPANS FLAT AND MR RATES +  PROFITS LESS THAN MR THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 40000,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 40000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -55,7 +55,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 19.0                     | 19.0             |
 
   Scenario:  MR-70 AC3 - SPANS FLAT AND MR RATES +  PROFITS GREATER THAN MR THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 300000,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 300000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -68,7 +68,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 20.0                     | 20.0             |
 
   Scenario:  MR-70 AC3 - SPANS FLAT AND MR RATES +  PROFITS GREATER THAN MR THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 250000,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 250000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -81,7 +81,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 20.0                     | 20.0             |
 
   Scenario:MR-49_AC1-ED -- YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS / ED'S AND AUGMENTED FIGURES LIE WITHIN 2023 THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 90000,exemptDistributions as 6000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 90000,exemptDistributions as 6000,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -94,7 +94,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 23.52                    | 21.71            |
 
   Scenario:MR-49_AC2-ED - YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS / ED'S AND AUGMENTED FIGURES ARE LESS THAN 2023 THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 40000,exemptDistributions as 6000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 40000,exemptDistributions as 6000,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -107,7 +107,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 19.0                     | 19.0             |
 
   Scenario:MR-49_AC3-ED - YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS / ED'S AND AUGMENTED FIGURES ARE GREATER THAN 2023 THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 290167,exemptDistributions as 6000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 290167,exemptDistributions as 6000,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -120,7 +120,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 23.52                    | 23.52            |
 
   Scenario:MR-49_AC4-ED - YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS / ED'S AND AUGMENTED FIGURES ARE EQUAL TO THE LOWER 2023 THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 44000,exemptDistributions as 6000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 44000,exemptDistributions as 6000,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -133,7 +133,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 19.0                     | 19.0             |
 
   Scenario:MR-49_AC5-ED - SPANS FLAT AND MR RATES +  ADJUSTED PROFITS / ED'S AND AUGMENTED FIGURES ARE EQUAL TO THE UPPER 2023 THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 240000,exemptDistributions as 10000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 240000,exemptDistributions as 10000,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -146,14 +146,14 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 23.52                    | 23.52            |
 
   Scenario:MR-49_AC7- ED - YEAR MR YEAR LEAP YEAR RATES +  ADJUSTED PROFITS / ED'S AND AUGMENTED FIGURES ARE WITHIN MR THRESHOLDS
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 100000,exemptDistributions as 20000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 100000,exemptDistributions as 20000,associatedCompanies as 0
     Then the MRC response code should be 200
     And  MRC response contains
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 25000.0                | 23.38            | 1625.0         | 23375.0        |
 
   Scenario:MR-49_AC8- YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS / ED'S AND AUGMENTED FIGURES ARE EQUAL TO THE LOWER 2023
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 40000,exemptDistributions as 20000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 40000,exemptDistributions as 20000,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -166,7 +166,7 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 23.52                    | 19.94            |
 
   Scenario:MR-49_AC9 - YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS / ED'S AND AUGMENTED FIGURES ARE EQUAL TO THE LOWER 2023
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 48000,exemptDistributions as 205000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 48000,exemptDistributions as 205000,associatedCompanies as 0
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
@@ -179,27 +179,113 @@ Feature:  Basic MR calculation for single financial year with MR rate
       | 23.52                    | 23.52            |
 
   Scenario:MR-49_AC10 - ONE COMPLETE YEAR WITH MR RATES +  PROFITS BELOW LOWER THRESHOLDS / ED'S AND AUGMENTED FIGURES ARE GREATER THAN THE LOWER 2023
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 40000,exemptDistributions as 20000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 40000,exemptDistributions as 20000,associatedCompanies as 0
     Then the MRC response code should be 200
     And  MRC response contains
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 10000.0                | 20.25            | 1900.0         | 8100.0         |
 
   Scenario:MR-49_AC11 - ONE COMPLETE YEAR WITH MR RATES +  PROFITS BELOW UPPER THRESHOLDS / ED'S AND AUGMENTED FIGURES ARE GREATER THAN THE UPPER 2023
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 230000,exemptDistributions as 30000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 230000,exemptDistributions as 30000,associatedCompanies as 0
     Then the MRC response code should be 200
     And  MRC response contains
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 57500.0                | 25.0             | 0.0            | 57500.0        |
 
   Scenario:MR-49_AC12 - ONE COMPLETE YEAR WITH MR RATES +  PROFITS / ED'S AND AUGMENTED FIGURES ARE WITHIN MR 2023
-    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 150000,exemptDistributions as 30000
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 150000,exemptDistributions as 30000,associatedCompanies as 0
     Then the MRC response code should be 200
     And  MRC response contains
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 37500.0                | 24.42            | 875.0          | 36625.0        |
 
+  Scenario:MR-58_AC1 - 1 AC - ED ** YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS LIE WITHIN THRESHOLDS
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 50000,exemptDistributions as 10000,associatedCompanies as 1
+    Then the MRC response code should be 200
+    And for the FY1 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 19.0                     | 2342.47                | 19.0             | 0.0            | 2342.47        |
+    And for the FY2 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 9417.81                | 23.38            | 612.16         | 8805.65        |
+    And the TOTAL will be
+      | effectiveTaxRateBeforeMR | effectiveTaxRate |
+      | 23.52                    | 22.3             |
+
+  Scenario:MR-58_AC2 - 2 AC - ED ** YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS LIE WITHIN THRESHOLDS
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 60000 ,exemptDistributions as 10000,associatedCompanies as 2
+    Then the MRC response code should be 200
+    And for the FY1 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 19.0                     | 2810.96                | 19.0             | 0.0            | 2810.96        |
+    And for the FY2 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 11301.37               | 24.71            | 129.16         | 11172.21       |
+    And the TOTAL will be
+      | effectiveTaxRateBeforeMR | effectiveTaxRate |
+      | 23.52                    | 23.31            |
+
+  Scenario:MR-58_AC3 - 7 AC - ED ** YEAR SPANS FLAT AND MR RATES +  ADJUSTED PROFITS LIE WITHIN THRESHOLDS
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 10000,exemptDistributions as 5000,associatedCompanies as 7
+    Then the MRC response code should be 200
+    And for the FY1 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 19.0                     | 468.49                 | 19.0             | 0.0            | 468.49         |
+    And for the FY2 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 1883.56                | 23.38            | 122.43         | 1761.13        |
+    And the TOTAL will be
+      | effectiveTaxRateBeforeMR | effectiveTaxRate |
+      | 23.52                    | 22.3             |
+
+  Scenario:MR-58_AC4 - 2 AC - ED ** YEAR SPANS FLAT AND MR RATES +  PROFITS LIE BELOW THRESHOLDS AUGMENTED WITHIN THRESHOLDS
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 12000,exemptDistributions as 6000,associatedCompanies as 2
+    Then the MRC response code should be 200
+    And for the FY1 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 19.0                     | 562.19                 | 19.0             | 0.0            | 562.19         |
+    And for the FY2 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 2260.27                | 19.56            | 492.24         | 1768.04        |
+    And the TOTAL will be
+      | effectiveTaxRateBeforeMR | effectiveTaxRate |
+      | 23.52                    | 19.42            |
+
+  Scenario:MR-58_AC5 - 3 AC - ED ** YEAR MR RATES +  ADJUSTED PROFITS LIE BELOW THRESHOLDS  (W5)
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 42000,exemptDistributions as 5000,associatedCompanies as 3
+    Then the MRC response code should be 200
+    And  MRC response contains
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 10500.0                | 24.51            | 207.77         | 10292.23       |
+
+  Scenario:MR-58_AC6 - 4 AC - ** ED **** YEAR ** SPANS FLAT AND MR RATES +  **  PROFITS ** LIE BELOW THRESHOLDS ** AUGMENTED WITHIN THRESHOLDS
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-01-01,accountingPeriodEnd as 2023-12-31, profit as 6000,exemptDistributions as 6000,associatedCompanies as 4
+    Then the MRC response code should be 200
+    And for the FY1 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 19.0                     | 281.1                  | 19.0             | 0.0            | 281.1          |
+    And for the FY2 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 1130.14                | 20.25            | 214.73         | 915.41         |
+    And the TOTAL will be
+      | effectiveTaxRateBeforeMR | effectiveTaxRate |
+      | 23.52                    | 19.94            |
+
+  Scenario:MR-58_AC7 - 2 AC - ** ED  COMPLETE MR YEAR RATES AND COVER LEAP YEAR +  **  AUGMENTED WITHIN THRESHOLDS
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 50000,exemptDistributions as 30000,associatedCompanies as 2
+    Then the MRC response code should be 200
+    And  MRC response contains
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 12500.0                | 24.94            | 31.25          | 12468.75       |
+
+  Scenario:MR-58_AC8 - 2 AC - ** ED  WITHIN ONE COMPLETE MR YEAR RATES AND COVER LEAP YEAR +  **  PROFITS ** LIE BELOW THRESHOLDS ** AUGMENTED WITHIN THRESHOLDS
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-06-01,accountingPeriodEnd as 2024-03-31, profit as 10500,exemptDistributions as 5000,associatedCompanies as 2
+    Then the MRC response code should be 200
+    And  MRC response contains
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 2625.0                 | 19.76            | 550.08         | 2074.92        |
+
   Scenario: Unable to retrieve MRC Service
-    When a request is made to GET response from MRC service for /calculatee with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-01, profit as 400000,exemptDistributions as 0
+    When a request is made to GET response from MRC service for /calculatee with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-01, profit as 400000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 404
 

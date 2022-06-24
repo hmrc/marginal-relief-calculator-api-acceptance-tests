@@ -27,21 +27,23 @@ import uk.gov.hmrc.test.api.utils.ScenarioContext
 
 class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually with Matchers {
   When(
-    "a request is made to GET response from MRC service for (.*) with query params accountingPeriodStart as (.*),accountingPeriodEnd as (.*), profit as (.*),exemptDistributions as (.*)"
+    "a request is made to GET response from MRC service for (.*) with query params accountingPeriodStart as (.*),accountingPeriodEnd as (.*), profit as (.*),exemptDistributions as (.*),associatedCompanies as (.*)"
   ) {
     (
       endPoint: String,
       accountingPeriodStart: String,
       accountingPeriodEnd: String,
       profit: String,
-      exemptDistributions: String
+      exemptDistributions: String,
+      associatedCompanies: String
     ) =>
       val response = getMarginalReliefCalculatorRequests(
         endPoint,
         accountingPeriodStart,
         accountingPeriodEnd,
         profit,
-        exemptDistributions
+        exemptDistributions,
+        associatedCompanies
       )
       ScenarioContext.set("response", response)
       println(s"RESPONSE --> ${response.body}")

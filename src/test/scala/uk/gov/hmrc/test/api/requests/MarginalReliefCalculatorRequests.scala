@@ -27,7 +27,8 @@ object MarginalReliefCalculatorRequests extends BaseUris {
     accountingPeriodStart: String,
     accountingPeriodEnd: String,
     profit: String,
-    exemptDistributions: String
+    exemptDistributions: String,
+    associatedCompanies: String
   ): StandaloneWSResponse = {
 
     val baseUri         = s"$marginalreliefCalculatorApiUrl/marginal-relief-calculator-backend$endpoint"
@@ -35,7 +36,8 @@ object MarginalReliefCalculatorRequests extends BaseUris {
       "accountingPeriodStart" -> accountingPeriodStart,
       "accountingPeriodEnd"   -> accountingPeriodEnd,
       "profit"                -> profit,
-      "exemptDistributions"   -> exemptDistributions
+      "exemptDistributions"   -> exemptDistributions,
+      "associatedCompanies"   -> associatedCompanies
     )
     val headers         = Map(
       "Content-Type" -> "application/json",

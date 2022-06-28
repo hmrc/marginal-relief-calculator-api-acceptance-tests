@@ -400,3 +400,5 @@ Feature:  Basic MR calculation for single financial year with MR rate
   Scenario: Unable to retrieve MRC Service
     When a request is made to GET response from MRC service for /calculatee with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-01, profit as 400000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 404
+
+

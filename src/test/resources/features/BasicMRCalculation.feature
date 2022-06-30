@@ -1,4 +1,4 @@
-Feature:  Basic MR calculation for single financial year with MR rate
+Feature: Basic MR calculation
 
   Scenario:MR-68_AC1 _1 COMPLETE YEAR + PROFITS LIES WITHIN MR THRESHOLDS
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-04-01,accountingPeriodEnd as 2024-03-31, profit as 100000,exemptDistributions as 0,associatedCompanies as 0

@@ -323,7 +323,7 @@ Feature: Complex MR calculation
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 19.0                     | 1900.0                 | 19.0             | 0.0            | 1900.0         |
 
-  Scenario:MR-59_AC9 - 2 AC - ED ** COMPLETE YEAR MR RATES +  ADJUSTED PROFITS &  AUGMENTED LESS THAN THE THRESHOLDS
+  Scenario:MR-59_AC10 - 4 AC - ED ** COMPLETE YEAR MR RATES +  ADJUSTED PROFITS LESS THAN THRESHOLDS  &  AUGMENTED PROFIT GREATER THAN THE THRESHOLDS
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2023-06-01,accountingPeriodEnd as 2024-03-31, profit as 5000,exemptDistributions as 50000,associatedCompanies as 4
     Then the MRC response code should be 200
     And  MRC response contains

@@ -25,6 +25,7 @@ sm --start MARGINAL_RELIEF_CALCULATOR_BACKEND --appendArgs '{"MARGINAL_RELIEF_CA
 "-Dcalculator-config.fy-configs.2.small-profit-rate=0.19",
 "-Dcalculator-config.fy-configs.2.main-rate=0.25",
 "-Dcalculator-config.fy-configs.2.marginal-relief-fraction=0.015"]}'
+delay 5.0;
 status_code=$(curl --write-out %{http_code} --silent --output /dev/null http://localhost:7100/ping/ping)
 if [[ "$status_code" -ne 200 ]]; then
   echo "ping endpoint response error $status_code.

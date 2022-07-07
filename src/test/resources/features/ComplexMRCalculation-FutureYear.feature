@@ -78,3 +78,30 @@ Feature: Complex MR calculation-FutureYear
     And  MRC response contains
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 5000.0                 | 24.94            | 12.33          | 4987.67        |
+
+  Scenario:MR-57_AC3 - FED - SPANS FUTURE NO RATES  AND FUTURE NO RATES +  PROFITS WITHIN MR THRESHOLDS (M5)
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2025-01-01,accountingPeriodEnd as 2025-12-31, profit as 100000,exemptDistributions as 10000,associatedCompanies as 0
+    Then the MRC response code should be 200
+    And for the FY1 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 6164.38                | 23.09            | 470.73         | 5693.65        |
+    And for the FY2 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 18835.62               | 23.09            | 1438.36        | 17397.26       |
+    And the TOTAL will be
+      | effectiveTaxRateBeforeMR | effectiveTaxRate |
+      | 25.0                     | 23.09            |
+
+  Scenario:MR-57_AC4 - FED - SPANS FUTURE NO RATES  AND FUTURE NO RATES +  PROFITS EQUAL TO LOWER MR THRESHOLDS (R5)
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2025-01-01,accountingPeriodEnd as 2025-12-31, profit as 40000,exemptDistributions as 10000,associatedCompanies as 0
+    Then the MRC response code should be 200
+    And for the FY1 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 19.0                     | 1837.97                | 24.8             | 50.44          | 1837.97        |
+    And for the FY2 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 19.0                     | 5726.03                | 24.8             | 154.11         | 5726.03        |
+    And the TOTAL will be
+      | effectiveTaxRateBeforeMR | effectiveTaxRate |
+      | 19.0                     | 19.0             |
+

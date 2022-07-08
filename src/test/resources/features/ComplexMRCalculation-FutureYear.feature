@@ -79,6 +79,46 @@ Feature: Complex MR calculation-FutureYear
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 5000.0                 | 24.94            | 12.33          | 4987.67        |
 
+  Scenario:MR-55_AC3 - 1 FAC - SPANS FUTURE NO RATES AND FUTURE NO RATES +  PROFITS WITHIN MR THRESHOLDS (M5)
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2025-01-01,accountingPeriodEnd as 2025-12-31, profit as 50000,exemptDistributions as 0,associatedCompanies as 1
+    Then the MRC response code should be 200
+    And for the FY1 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 3082.19                | 22.75            | 277.4          | 2804.79        |
+    And for the FY2 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 9417.81                | 22.75            | 847.6          | 8570.21        |
+    And the TOTAL will be
+      | effectiveTaxRateBeforeMR | effectiveTaxRate |
+      | 25.0                     | 22.75            |
+
+  Scenario:MR-55_AC4 - 2 FAC - SPANS FUTURE NO RATES AND FUTURE NO RATES +  PROFITS EQUAL TO LOWER MR THRESHOLDS (R5)
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2025-01-01,accountingPeriodEnd as 2025-12-31, profit as 16666.67,exemptDistributions as 0,associatedCompanies as 2
+    Then the MRC response code should be 200
+    And for the FY1 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 1027.4                 | 19.0             | 246.58         | 780.82         |
+    And for the FY2 the MRC service will return
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 3139.27                | 19.0             | 753.42         | 2385.85        |
+    And the TOTAL will be
+      | effectiveTaxRateBeforeMR | effectiveTaxRate |
+      | 25.0                     | 19.0             |
+
+  Scenario:MR-55_AC5 - 3 FAC - 1 COMPLETE FUTURE LEAP YEAR WITH NO RATES +  PROFITS WITHIN MR THRESHOLDS (C46)
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2027-04-01,accountingPeriodEnd as 2028-03-31, profit as 50000,exemptDistributions as 0,associatedCompanies as 3
+    Then the MRC response code should be 200
+    And  MRC response contains
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 12500.0                | 24.63            | 187.5          | 12312.5        |
+
+  Scenario:MR-55_AC6 - 4 FAC - 1 COMPLETE FUTURE LEAP YEAR WITH NO RATES +  PROFITS ABOVE MR THRESHOLDS (E46)
+    When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2027-04-01,accountingPeriodEnd as 2028-03-31, profit as 55000,exemptDistributions as 0,associatedCompanies as 4
+    Then the MRC response code should be 200
+    And  MRC response contains
+      | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
+      | 25.0                     | 13750.0                | 25.0             | 0.0            | 13750.0        |
+
   Scenario:MR-57_AC3 - FED - SPANS FUTURE NO RATES  AND FUTURE NO RATES +  PROFITS WITHIN MR THRESHOLDS (M5)
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2025-01-01,accountingPeriodEnd as 2025-12-31, profit as 100000,exemptDistributions as 10000,associatedCompanies as 0
     Then the MRC response code should be 200

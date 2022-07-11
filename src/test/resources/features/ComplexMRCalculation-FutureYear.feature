@@ -120,7 +120,6 @@ Feature: Complex MR calculation-FutureYear
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
       | 25.0                     | 13750.0                | 24.86            | 75.0           | 13675.0        |
 
-@mr57
   Scenario:MR-57_AC3 - FED - SPANS FUTURE NO RATES  AND FUTURE NO RATES +  PROFITS WITHIN MR THRESHOLDS (M5)
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2025-01-01,accountingPeriodEnd as 2025-12-31, profit as 100000,exemptDistributions as 10000,associatedCompanies as 0
     Then the MRC response code should be 200
@@ -134,7 +133,7 @@ Feature: Complex MR calculation-FutureYear
       | effectiveTaxRateBeforeMR | effectiveTaxRate |
       | 25.0                     | 23.09            |
 
-  @mr57
+    @wip
   Scenario:MR-57_AC4 - FED - SPANS FUTURE NO RATES  AND FUTURE NO RATES +  PROFITS EQUAL TO LOWER MR THRESHOLDS (R5)
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2025-01-01,accountingPeriodEnd as 2025-12-31, profit as 40000,exemptDistributions as 10000,associatedCompanies as 0
     Then the MRC response code should be 200
@@ -147,4 +146,3 @@ Feature: Complex MR calculation-FutureYear
     And the TOTAL will be
       | effectiveTaxRateBeforeMR | effectiveTaxRate |
       | 19.0                     | 19.0             |
-

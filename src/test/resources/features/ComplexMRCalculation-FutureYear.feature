@@ -125,15 +125,15 @@ Feature: Complex MR calculation-FutureYear
     Then the MRC response code should be 200
     And for the FY1 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
-      | 25.0                     | 6164.38                | 23.09            | 470.73         | 5693.65        |
+      | 25.0                     | 6164.38                | 22.41            | 638.85         | 5525.53        |
     And for the FY2 the MRC service will return
       | effectiveTaxRateBeforeMR | corporationTaxBeforeMR | effectiveTaxRate | marginalRelief | corporationTax |
-      | 25.0                     | 18835.62               | 23.09            | 1438.36        | 17397.26       |
+      | 25.0                     | 18835.62               | 22.41            | 1952.05        | 16883.56       |
     And the TOTAL will be
       | effectiveTaxRateBeforeMR | effectiveTaxRate |
-      | 25.0                     | 23.09            |
+      | 25.0                     | 22.41            |
 
-    @wip
+  @wip
   Scenario:MR-57_AC4 - FED - SPANS FUTURE NO RATES  AND FUTURE NO RATES +  PROFITS EQUAL TO LOWER MR THRESHOLDS (R5)
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2025-01-01,accountingPeriodEnd as 2025-12-31, profit as 40000,exemptDistributions as 10000,associatedCompanies as 0
     Then the MRC response code should be 200

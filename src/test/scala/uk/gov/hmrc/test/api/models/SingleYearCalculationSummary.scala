@@ -19,11 +19,7 @@ package uk.gov.hmrc.test.api.models
 import play.api.libs.json.{Json, OFormat}
 
 case class SingleYearCalculationSummary(
-  effectiveTaxRateBeforeMR: Double,
-  corporationTaxBeforeMR: Double,
-  effectiveTaxRate: Double,
-  marginalRelief: Double,
-  corporationTax: Double
+  details: MarginalRateYear
 )
 
 object SingleYearCalculationSummary {

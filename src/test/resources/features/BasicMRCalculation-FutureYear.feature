@@ -1,3 +1,4 @@
+@wip
 Feature: Future MR calculation
 
   Scenario:MR-63_AC5 - SPANS 2 MR YEARS + NO CONFIG FOR NAP 1 & NAP 2 + PROFITS IS WITHIN THE LOWER & UPPER MR THRESHOLDS

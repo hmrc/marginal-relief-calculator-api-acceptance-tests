@@ -14,15 +14,23 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.cucumber.runner
-import io.cucumber.junit.{Cucumber, CucumberOptions}
-import org.junit.runner.RunWith
+package uk.gov.hmrc.test.api.models
 
-@RunWith(classOf[Cucumber])
-@CucumberOptions(
-  features = Array("src/test/resources/features"),
-  glue = Array("uk.gov.hmrc.test.api.cucumber.stepdefs", "uk.gov.hmrc.test.api.cucumber.hooks"),
-  plugin = Array("pretty", "html:target/cucumber", "json:target/cucumber.json"),
-  tags = Array("@runME")
+import play.api.libs.json.{Json, OFormat}
+
+final case class MarginalRateYear(
+  taxRateBeforeMR: Double,
+  corporationTaxBeforeMR: Double,
+  adjustedDistributions: Double,
+  taxRate: Double,
+  year: Int,
+  adjustedUpperThreshold: Double,
+  adjustedLowerThreshold: Double,
+  marginalRelief: Double,
+  corporationTax: Double,
+  adjustedProfit: Double
 )
-class MarginalReliefCalculatorApiTestRunner {}
+object MarginalRateYear {
+  implicit val formatMarginalRateYear: OFormat[MarginalRateYear] = Json.format[MarginalRateYear]
+}
+

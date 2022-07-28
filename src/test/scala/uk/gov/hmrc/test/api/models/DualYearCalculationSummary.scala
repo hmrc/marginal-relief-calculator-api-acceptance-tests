@@ -16,15 +16,13 @@
 
 package uk.gov.hmrc.test.api.models
 
-import play.api.libs.json.Json
+import play.api.libs.json.{Json, OFormat}
 
 final case class DualYearCalculationSummary(
-  year1: YearSummary,
-  year2: YearSummary,
-  effectiveTaxRateBeforeMR: Double,
-  effectiveTaxRate: Double
+  year1: FlatRateYear,
+  year2: MarginalRateYear
 )
 
 object DualYearCalculationSummary {
-  implicit val formatDualYear = Json.format[DualYearCalculationSummary]
+  implicit val formatDualYearCalculationSummary: OFormat[DualYearCalculationSummary] = Json.format[DualYearCalculationSummary]
 }

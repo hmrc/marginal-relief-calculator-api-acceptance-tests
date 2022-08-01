@@ -44,7 +44,7 @@ Feature: Basic MR calculation
     And for the FlatRate year the MRC Response will return
       | year | corporationTax | taxRate | adjustedProfit |
       | 2022 | 6329.86        | 19.0    | 33315.07       |
-    And for the FY2 the MRC service will return
+    And for the MarginalRate year the MRC Response will return
       | taxRateBeforeMR | corporationTaxBeforeMR | adjustedDistributions | taxRate | year | adjustedUpperThreshold | marginalRelief | adjustedLowerThreshold | corporationTax | adjustedProfit |
       | 19.0            | 1270.14                | 0.0                   | 19.0    | 2023 | 41780.82               | 0.0            | 8356.16                | 1270.14        | 6684.93        |
 

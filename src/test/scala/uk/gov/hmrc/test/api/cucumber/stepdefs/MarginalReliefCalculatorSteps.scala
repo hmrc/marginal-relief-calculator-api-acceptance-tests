@@ -86,7 +86,7 @@ class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually wit
       responseBody.adjustedProfit.toString shouldBe asMapTransposed.get("adjustedProfit").toString
     }
   }
-  And("for the FY1 the MRC service will return") { (dataTable: DataTable) =>
+  And("for the FlatRate year the MRC Response will return") { (dataTable: DataTable) =>
     val asMapTransposed                = dataTable.transpose().asMap(classOf[String], classOf[String])
     val response: StandaloneWSResponse = ScenarioContext.get("response")
     val responseBody                   = Json.parse(response.body).as[DualYearCalculationSummary].year1
@@ -104,7 +104,7 @@ class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually wit
     }
   }
 
-  And("for the FY2 the MRC service will return") { (dataTable: DataTable) =>
+  And("for the MarginalRate year the MRC Response will return") { (dataTable: DataTable) =>
     val asMapTransposed                = dataTable.transpose().asMap(classOf[String], classOf[String])
     val response: StandaloneWSResponse = ScenarioContext.get("response")
     val responseBody                   = Json.parse(response.body).as[DualYearCalculationSummary].year2

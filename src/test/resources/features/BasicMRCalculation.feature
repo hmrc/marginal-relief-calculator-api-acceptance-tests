@@ -1,4 +1,3 @@
-@runME
 Feature: Basic MR calculation
 
   Scenario:MR-68_AC1 _1 COMPLETE YEAR + PROFITS LIES WITHIN MR THRESHOLDS
@@ -32,17 +31,17 @@ Feature: Basic MR calculation
   Scenario:  MR-70 AC1 - SPANS FLAT AND MR RATES +  PROFITS WITH WITHIN MR THRESHOLDS
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 60000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
-    And for the FY1 the MRC service will return
+    And for the FlatRate year the MRC Response will return
       | year | corporationTax | taxRate | adjustedProfit |
       | 2022 | 9494.79        | 19.0    | 49972.6        |
-    And for the FY2 the MRC service will return
+    And for the MarginalRate year the MRC Response will return
       | taxRateBeforeMR | corporationTaxBeforeMR | adjustedDistributions | taxRate | year | adjustedUpperThreshold | marginalRelief | adjustedLowerThreshold | corporationTax | adjustedProfit |
       | 25.0            | 2506.85                | 0.0                   | 20.25   | 2023 | 41780.82               | 476.3          | 8356.16                | 2030.55        | 10027.4        |
 
   Scenario:  MR-70 AC2 - SPANS FLAT AND MR RATES +  PROFITS LESS THAN MR THRESHOLDS
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 40000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
-    And for the FY1 the MRC service will return
+    And for the FlatRate year the MRC Response will return
       | year | corporationTax | taxRate | adjustedProfit |
       | 2022 | 6329.86        | 19.0    | 33315.07       |
     And for the FY2 the MRC service will return
@@ -52,20 +51,20 @@ Feature: Basic MR calculation
   Scenario:  MR-70 AC3 - SPANS FLAT AND MR RATES +  PROFITS GREATER THAN MR THRESHOLDS
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 300000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
-    And for the FY1 the MRC service will return
+    And for the FlatRate year the MRC Response will return
       | year | corporationTax | taxRate | adjustedProfit |
       | 2022 | 47473.97       | 19.0    | 249863.01      |
-    And for the FY2 the MRC service will return
+    And for the MarginalRate year the MRC Response will return
       | taxRateBeforeMR | corporationTaxBeforeMR | adjustedDistributions | taxRate | year | adjustedUpperThreshold | marginalRelief | adjustedLowerThreshold | corporationTax | adjustedProfit |
       | 25.0            | 12534.25               | 0.0                   | 25.0    | 2023 | 41780.82               | 0.0            | 8356.16                | 12534.25       | 50136.99       |
 
   Scenario:  MR-70 AC3 - SPANS FLAT AND MR RATES +  PROFITS GREATER THAN MR THRESHOLDS
     When a request is made to GET response from MRC service for /calculate with query params accountingPeriodStart as 2022-06-01,accountingPeriodEnd as 2023-05-31, profit as 250000,exemptDistributions as 0,associatedCompanies as 0
     Then the MRC response code should be 200
-    And for the FY1 the MRC service will return
+    And for the FlatRate year the MRC Response will return
       | year | corporationTax | taxRate | adjustedProfit |
       | 2022 | 39561.64       | 19.0    | 208219.18      |
-    And for the FY2 the MRC service will return
+    And for the MarginalRate year the MRC Response will return
       | taxRateBeforeMR | corporationTaxBeforeMR | adjustedDistributions | taxRate | year | adjustedUpperThreshold | marginalRelief | adjustedLowerThreshold | corporationTax | adjustedProfit |
       | 25.0            | 10445.21               | 0.0                   | 25.0    | 2023 | 41780.82               | 0.0            | 8356.16                | 10445.21       | 41780.82       |
 

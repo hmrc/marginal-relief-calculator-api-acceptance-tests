@@ -33,4 +33,3 @@ final case class MarginalRateYear(
 object MarginalRateYear {
   implicit val formatMarginalRateYear: OFormat[MarginalRateYear] = Json.format[MarginalRateYear]
 }
-

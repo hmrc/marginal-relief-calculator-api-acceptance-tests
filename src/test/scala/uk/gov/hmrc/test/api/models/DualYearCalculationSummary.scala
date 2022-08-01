@@ -24,5 +24,6 @@ final case class DualYearCalculationSummary(
 )
 
 object DualYearCalculationSummary {
-  implicit val formatDualYearCalculationSummary: OFormat[DualYearCalculationSummary] = Json.format[DualYearCalculationSummary]
+  implicit val formatDualYearCalculationSummary: OFormat[DualYearCalculationSummary] =
+    Json.format[DualYearCalculationSummary]
 }

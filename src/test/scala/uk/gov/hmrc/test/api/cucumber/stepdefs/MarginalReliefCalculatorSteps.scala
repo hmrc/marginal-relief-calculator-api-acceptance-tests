@@ -135,5 +135,6 @@ class MarginalReliefCalculatorSteps extends ScalaDsl with EN with Eventually wit
     if (asMapTransposed.containsKey("adjustedProfit")) {
       responseBody.adjustedProfit.toString shouldBe asMapTransposed.get("adjustedProfit").toString
     }
+
   }
 }

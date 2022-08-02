@@ -18,13 +18,13 @@ package uk.gov.hmrc.test.api.models
 
 import play.api.libs.json.{Json, OFormat}
 
-final case class FlatRateYear(
-  taxRateBeforeMR: Option[Double],
-  corporationTaxBeforeMR: Option[Double],
-  adjustedDistributions: Option[Double],
-  adjustedUpperThreshold: Option[Double],
-  adjustedLowerThreshold: Option[Double],
-  marginalRelief: Option[Double],
+case class FlatRateYear(
+  taxRateBeforeMR:Option[Double],
+  corporationTaxBeforeMR:Option[Double],
+  adjustedDistributions:Option[Double],
+  adjustedUpperThreshold:Option[Double],
+  adjustedLowerThreshold:Option[Double],
+  marginalRelief:Option[Double],
   year: Int,
   corporationTax: Double,
   taxRate: Double,
